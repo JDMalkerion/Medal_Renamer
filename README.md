@@ -61,7 +61,7 @@ python rename_medal.py --db "C:\path\to\medal-123.db"
 
 ## How it works
 
-The tool finds Medal's local database, normally under `%APPDATA%\Medal\medal-<id>.db`, and copies it (including any SQLite `-wal` and `-shm` files) to a temporary folder. It never writes to the original database. From the copy, it reads each clip's file path from `contents.video_path` and its title from the binary metadata blob. Clips without a title are skipped; auto-generated titles such as `Player Slain - Rell` are kept. Duplicate titles are numbered, and characters that are illegal in Windows filenames are stripped. Renaming is a dry run by default; `--apply` performs the changes and records them in a CSV log that can be used with `--undo`.
+The tool finds Medal's local database, normally under `%APPDATA%\Medal\medal-<id>.db`, and copies it (including any SQLite `-wal` and `-shm` files) to a temporary folder. It never writes to the original database. From the copy, it reads each clip's file path from `contents.video_path` and its title from the binary metadata blob. Clips without a title are skipped; auto-generated titles such as `Player Slain - Rell` are kept. Characters that are illegal in Windows filenames are stripped. Renaming is a dry run by default; `--apply` performs the changes and records them in a CSV log that can be used with `--undo`.
 
 Duplicate titles are numbered with the oldest clip keeping the plain name (`Title`, `Title (2)`, `Title (3)`). Files stay in their original folder and keep their extension. Screenshots and thumbnails are not touched. Clips whose files can't be found are reported but not changed. If you have multiple Medal accounts, use `--db` to select the database.
 
@@ -75,5 +75,9 @@ Duplicate titles are numbered with the oldest clip keeping the plain name (`Titl
 ## Troubleshooting
 
 If titles are missing or the proposed names look wrong, run `python rename_medal.py --debug` and open an issue with the output. Before posting, remove your Windows username from the database path and any clip names you don't want public; include your Python version and approximately when Medal was installed. Do not post your Medal database or any account data.
+
+## AI disclosure
+
+This tool was built with AI assistance: the script was written with Claude (by Anthropic), and GitHub Copilot helped with repository setup. The author tested it on real Medal clips on their own machine.
 
 This is an unofficial tool and is not affiliated with Medal or Medal.tv.
